@@ -20,7 +20,7 @@
   [& content]
   (html5
     [:head
-     [:title "Welcome to geekrand"]
+     [:title "GeekRand"]
      (include-css
        "/css/bootstrap.min.css"
        "/css/bootstrap-responsive.min.css"
@@ -31,5 +31,4 @@
     [:body content]))
 
 (defn common [& content]
-  (base (header) [:div#content content] (footer)))
-
+  (base [:div.container-fluid content]))

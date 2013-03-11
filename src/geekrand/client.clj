@@ -1,7 +1,7 @@
 (ns geekrand.client
   (:require [clj-http.client :as http]))
 
-(defn get-collection
+(defn get-collection-xml
   [username]
   (http/get "http://www.boardgamegeek.com/xmlapi2/collection"
             {:query-params {:own 1
