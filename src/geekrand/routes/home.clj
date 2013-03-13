@@ -2,11 +2,12 @@
   (:use compojure.core hiccup.element)
   (:require [geekrand.views.layout :as layout]
             [geekrand.util :as util]
+            [geekrand.client :as client]
             [clojure.xml]))
 
 (defn get-random-game []
   (rand-nth (:content
-    (clojure.xml/parse "http://www.boardgamegeek.com/xmlapi2/collection?own=1&subtype=boardgame&username=DGM Library"))))
+    (clojure.xml/parse (:body (client/get-collection-stream "DGM Library"))))))
 
 (defn home-page []
   (let [game (get-random-game)
