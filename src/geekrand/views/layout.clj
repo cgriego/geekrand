@@ -25,9 +25,8 @@
        "/css/bootstrap.min.css"
        "/css/bootstrap-responsive.min.css"
        "/css/screen.css")
-     (include-js
-       "//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"
-       "/js/bootstrap.min.js")]
+     (include-js "//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js")]
+       ;"/js/bootstrap.min.js")]
     [:body content]))
 
 (defn common [& content]

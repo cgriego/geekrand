@@ -12,9 +12,10 @@
   (let [game (get-random-game)
         game-name (first (:content (first (:content game))))
         game-id (:objectid (:attrs game))
+        game-image (first (:content (nth (:content game) 2)))
         game-url (str "http://boardgamegeek.com/boardgame/" game-id)]
     (layout/common
-      [:h1 (link-to game-url game-name)])))
+      [:h1 (link-to game-url game-name [:br] (image game-image ""))])))
 
 (defroutes home-routes
   (GET "/" [] (home-page)))
