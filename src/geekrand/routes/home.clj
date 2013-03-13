@@ -5,12 +5,12 @@
             [geekrand.client :as client]
             [clojure.xml]))
 
-(defn get-random-game []
+(defn get-random-game [username]
   (rand-nth (:content
-    (clojure.xml/parse (:body (client/get-collection-stream "DGM Library"))))))
+    (clojure.xml/parse (:body (client/get-collection-stream username))))))
 
 (defn home-page []
-  (let [game (get-random-game)
+  (let [game (get-random-game "DGM Library")
         game-name (first (:content (first (:content game))))
         game-id (:objectid (:attrs game))
         game-image (first (:content (nth (:content game) 2)))
