@@ -8,7 +8,8 @@
                  [hiccup "1.0.2"]
                  [ring-server "0.2.8"]
                  [com.taoensso/timbre "1.5.2"]
-                 [com.taoensso/tower "1.2.0"]]
+                 [com.taoensso/tower "1.2.0"]
+                 [org.clojure/data.zip "0.1.1"]]
   :plugins [[lein-ring "0.8.3"]]
   :ring {:handler geekrand.handler/war-handler
          :init    geekrand.handler/init

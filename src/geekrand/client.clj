@@ -3,8 +3,8 @@
 
 (defn get-collection-stream
   [username]
-  (http/get "http://www.boardgamegeek.com/xmlapi2/collection"
+  (:body (http/get "http://www.boardgamegeek.com/xmlapi2/collection"
             {:as :stream
              :query-params {:own 1
                             :subtype "boardgame"
-                            :username username}}))
+                            :username username}})))

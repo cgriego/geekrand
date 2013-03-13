@@ -3,20 +3,29 @@
   (:require [geekrand.views.layout :as layout]
             [geekrand.util :as util]
             [geekrand.client :as client]
-            [clojure.xml]))
+            [clojure.xml]
+            [clojure.zip]
+            [clojure.data.zip.xml]))
+
+(defn get-games [username]
+  (let [xml (-> (client/get-collection-stream username) clojure.xml/parse clojure.zip/xml-zip)
+        items (clojure.data.zip.xml/xml-> xml :item)]
+    (map (fn [item]
+      {
+        :objectid (clojure.data.zip.xml/xml1-> item (clojure.data.zip.xml/attr :objectid))
+        :name     (clojure.data.zip.xml/xml1-> item :name clojure.data.zip.xml/text)
+        :image    (clojure.data.zip.xml/xml1-> item :image clojure.data.zip.xml/text)
+      }
+    ) items)))
 
 (defn get-random-game [username]
-  (rand-nth (:content
-    (clojure.xml/parse (:body (client/get-collection-stream username))))))
+  (rand-nth (get-games username)))
 
 (defn home-page []
   (let [game (get-random-game "DGM Library")
-        game-name (first (:content (first (:content game))))
-        game-id (:objectid (:attrs game))
-        game-image (first (:content (nth (:content game) 2)))
-        game-url (str "http://boardgamegeek.com/boardgame/" game-id)]
+        game-url (str "http://boardgamegeek.com/boardgame/" (:objectid game))]
     (layout/common
-      [:h1 (link-to game-url game-name [:br] (image game-image ""))])))
+      [:h1 (link-to game-url (:name game) [:br] (image (:image game) ""))])))
 
 (defroutes home-routes
   (GET "/" [] (home-page)))
