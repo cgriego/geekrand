@@ -4,7 +4,7 @@
             [geekrand.util :as util]))
 
 (defn home-page []
-  (let [game (get-random-game "DGM Library")]
+  (let [game (random-game "DGM Library")]
     (layout/common
       [:h1 (link-to (game-url game) (:name game) [:br] (image (:thumbnail game) ""))])))
 
