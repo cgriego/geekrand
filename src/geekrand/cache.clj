@@ -5,7 +5,13 @@
 (defonce connection (atom nil))
 
 (defn connect! []
-  (reset! connection (memcache/bin-connection "localhost:11211")))
+  (reset! connection
+    (if (System/getenv "MEMCACHIER_SERVERS")
+      (memcache/bin-connection
+        (System/getenv "MEMCACHIER_SERVERS")
+        (System/getenv "MEMCACHIER_USERNAME")
+        (System/getenv "MEMCACHIER_PASSWORD"))
+      (memcache/bin-connection "localhost:11211"))))
 
 (defn disconnect! []
   (memcache/shutdown @connection)
