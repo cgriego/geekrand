@@ -11,8 +11,10 @@
                  [com.taoensso/tower "1.2.0"]
                  [org.clojure/data.zip "0.1.1"]
                  [clojurewerkz/spyglass "1.1.0-beta3"]]
-  :repositories {"spy-memcached" {:url "http://files.couchbase.com/maven2/" :checksum :ignore}}
-  :plugins [[lein-ring "0.8.3"]]
+  :git-dependencies [["https://github.com/cgriego/spymemcached.git"]]
+  :source-paths [".lein-git-deps/spymemcached/src" "src"]
+  :plugins [[lein-ring "0.8.3"]
+            [lein-git-deps "0.0.1-SNAPSHOT"]]
   :ring {:handler geekrand.handler/war-handler
          :init    geekrand.handler/init
          :destroy geekrand.handler/destroy}
