@@ -6,7 +6,7 @@
 (defn home-page []
   (let [game (random-game "DGM Library")]
     (layout/common
-      [:h1 (link-to (game-url game) (:name game) [:br] (image (:thumbnail game) ""))])))
+      (link-to (game-url game) [:h1 (:name game)] (image (:thumbnail game) "")))))
 
 (defroutes home-routes
   (GET "/" [] (home-page)))
