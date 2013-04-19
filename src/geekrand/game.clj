@@ -38,4 +38,7 @@
   (take amount (shuffle (games username))))
 
 (defn random-game [username]
-  (rand-nth (games username)))
+  (let [games (games username)]
+    (if (empty? games)
+      nil
+      (rand-nth games))))
