@@ -10,7 +10,7 @@
       (form-to {:style "margin: 10px 0;"} [:get "/"]
         [:div {:class "input-append"}
           (text-field "username" username)
-          [:button {:type "submit" :class "btn"} "Search"]])
+          [:button {:type "submit" :class "btn"} "Randomize"]])
       (if (nil? game)
         [:p {:class "lead"} [:strong "You don't have any games!"]]
         (link-to (game-url game) [:h1 (:name game)] (image (:thumbnail game) ""))))))
