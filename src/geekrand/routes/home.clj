@@ -19,7 +19,21 @@
       (let [game (random-game username)]
         (if (nil? game)
           [:p.lead [:strong "You don't have any games!"]]
-          (link-to (game-url game) [:h1 (:name game)] (image (:thumbnail game) "")))))))
+          (let [game (game-details (:objectid game))]
+            (list
+              (link-to (game-url game) [:h1 (:name game)] [:p (image (:thumbnail game) "")])
+              [:p
+                (if (= (:min-players game) (:max-players game))
+                  (if-not (= 0 (:min-players game))
+                    (list (:min-players game) " Players"))
+                  (list (:min-players game) "-" (:max-players game) " Players"))
+                [:br]
+                (if-not (= 0 (:playing-time game))
+                  (list
+                    (:playing-time game) " Minute" (if-not (= 1 (:playing-time game)) "s")
+                    [:br]))
+                    (if-not (= 0 (:min-age game))
+                  (list (:min-age game) " and Older"))])))))))
 
 (defroutes home-routes
   (GET "/" [username] (home-page username)))
