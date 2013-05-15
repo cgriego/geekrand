@@ -7,24 +7,24 @@
   (:import [java.io ByteArrayInputStream]))
 
 (defrecord Game [name objectid image thumbnail])
-(defrecord GameDetails [name objectid image thumbnail min-players max-players playing-time min-age])
+(defrecord GameDetails [name objectid image thumbnail min-players max-players playing-time min-age bgg-rank])
 
 (defn game-url [{:keys [objectid]}]
   (str "http://boardgamegeek.com/boardgame/" objectid))
 
-(defn- string->stream [string]
+(defn string->stream [string]
   (java.io.ByteArrayInputStream. (.getBytes ^String string "UTF-8")))
 
-(defn- xml-zip->Game [item]
+(defn xml-zip->Game [item]
   (map->Game { :objectid  (zip-xml/xml1-> item (zip-xml/attr :objectid))
                :name      (zip-xml/xml1-> item :name      zip-xml/text)
                :image     (zip-xml/xml1-> item :image     zip-xml/text)
                :thumbnail (zip-xml/xml1-> item :thumbnail zip-xml/text)}))
 
-(defn- xml->xml-zip [xml]
+(defn xml->xml-zip [xml]
   (-> xml string->stream xml/parse zip/xml-zip))
 
-(defn- xml->games [xml]
+(defn xml->games [xml]
   (map xml-zip->Game (zip-xml/xml-> (xml->xml-zip xml) :item)))
 
 (defn games [username]
@@ -49,10 +49,11 @@
                         :name         (zip-xml/xml1-> item :name        (zip-xml/attr :value))
                         :image        (zip-xml/xml1-> item :image       zip-xml/text)
                         :thumbnail    (zip-xml/xml1-> item :thumbnail   zip-xml/text)
-                        :min-players  (Integer/parseInt (zip-xml/xml1-> item :minplayers  (zip-xml/attr :value)))
-                        :max-players  (Integer/parseInt (zip-xml/xml1-> item :maxplayers  (zip-xml/attr :value)))
-                        :playing-time (Integer/parseInt (zip-xml/xml1-> item :playingtime (zip-xml/attr :value)))
-                        :min-age      (Integer/parseInt (zip-xml/xml1-> item :minage      (zip-xml/attr :value)))})))
+                        :min-players  (Integer/parseInt (zip-xml/xml1-> item :minplayers     (zip-xml/attr :value)))
+                        :max-players  (Integer/parseInt (zip-xml/xml1-> item :maxplayers     (zip-xml/attr :value)))
+                        :playing-time (Integer/parseInt (zip-xml/xml1-> item :playingtime    (zip-xml/attr :value)))
+                        :min-age      (Integer/parseInt (zip-xml/xml1-> item :minage         (zip-xml/attr :value)))
+                        :bgg-rank     (zip-xml/xml1-> item :statistics :ratings :ranks :rank (zip-xml/attr :value))})))
 
 (defn game-details [objectid]
   (xml->game-details (client/thing-xml objectid)))

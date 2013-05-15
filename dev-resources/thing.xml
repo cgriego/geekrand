@@ -11,50 +11,50 @@
     <name type="alternate" sortindex="1" value="Battlestar Galactica: Le Jeu de Plateau"/>
     <name type="alternate" sortindex="1" value="太空堡垒 卡拉狄加"/>
     <name type="alternate" sortindex="1" value="太空堡垒卡拉狄加"/>
-    <description>Battlestar Galactica: The Board Game is an exciting game of mistrust, intrigue, and the struggle for survival. Based on the epic and widely-acclaimed Sci Fi Channel series, Battlestar Galactica: The Board Game puts players in the role of one of ten of their favorite characters from the show. Each playable character has their own abilities and weaknesses, and must all work together in order for humanity to have any hope of survival. However, one or more players in every game secretly side with the Cylons. Players must attempt to expose the traitor while fuel shortages, food contaminations, and political unrest threatens to tear the fleet apart.&amp;#10;&amp;#10;After the Cylon attack on the Colonies, the battered remnants of the human race are on the run, constantly searching for the next signpost on the road to Earth. They face the threat of Cylon attack from without, and treachery and crisis from within. Humanity must work together if they are to have any hope of survival&amp;hellip;but how can they, when any of them may, in fact, be a Cylon agent?&amp;#10;&amp;#10;Battlestar Galactica: The Board Game is a semi-cooperative game for 3-6 players ages 10 and up that can be played in 2-3 hours.&amp;#10;&amp;#10;Expanded by:&amp;#10;&amp;#10;&amp;#10;    Battlestar Galactica: Pegasus Expansion&amp;#10;    Battlestar Galactica: Exodus Expansion&amp;#10;    Battlestar Galactica: Daybreak Expansion&amp;#10;&amp;#10;&amp;#10;</description>
+    <description>Battlestar Galactica: The Board Game is an exciting game of mistrust, intrigue, and the struggle for survival. Based on the epic and widely-acclaimed Sci Fi Channel series, Battlestar Galactica: The Board Game puts players in the role of one of ten of their favorite characters from the show. Each playable character has their own abilities and weaknesses, and must all work together in order for humanity to have any hope of survival. However, one or more players in every game secretly side with the Cylons. Players must attempt to expose the traitor while fuel shortages, food contaminations, and political unrest threatens to tear the fleet apart.&amp;#10;&amp;#10;After the Cylon attack on the Colonies, the battered remnants of the human race are on the run, constantly searching for the next signpost on the road to Earth. They face the threat of Cylon attack from without, and treachery and crisis from within. Humanity must work together if they are to have any hope of survival&amp;hellip;but how can they, when any of them may, in fact, be a Cylon agent?&amp;#10;&amp;#10;Battlestar Galactica: The Board Game is a semi-cooperative game for 3-6 players ages 10 and up that can be played in 2-3 hours.&amp;#10;&amp;#10;</description>
     <yearpublished value="2008"/>
     <minplayers value="3"/>
     <maxplayers value="6"/>
-    <poll name="suggested_numplayers" title="User Suggested Number of Players" totalvotes="588">
+    <poll name="suggested_numplayers" title="User Suggested Number of Players" totalvotes="592">
       <results numplayers="1">
         <result value="Best" numvotes="1"/>
         <result value="Recommended" numvotes="8"/>
-        <result value="Not Recommended" numvotes="315"/>
+        <result value="Not Recommended" numvotes="319"/>
       </results>
       <results numplayers="2">
         <result value="Best" numvotes="2"/>
         <result value="Recommended" numvotes="7"/>
-        <result value="Not Recommended" numvotes="321"/>
+        <result value="Not Recommended" numvotes="325"/>
       </results>
       <results numplayers="3">
         <result value="Best" numvotes="12"/>
-        <result value="Recommended" numvotes="104"/>
-        <result value="Not Recommended" numvotes="274"/>
+        <result value="Recommended" numvotes="105"/>
+        <result value="Not Recommended" numvotes="277"/>
       </results>
       <results numplayers="4">
         <result value="Best" numvotes="41"/>
-        <result value="Recommended" numvotes="318"/>
-        <result value="Not Recommended" numvotes="107"/>
+        <result value="Recommended" numvotes="321"/>
+        <result value="Not Recommended" numvotes="108"/>
       </results>
       <results numplayers="5">
-        <result value="Best" numvotes="438"/>
+        <result value="Best" numvotes="442"/>
         <result value="Recommended" numvotes="104"/>
         <result value="Not Recommended" numvotes="4"/>
       </results>
       <results numplayers="6">
-        <result value="Best" numvotes="199"/>
-        <result value="Recommended" numvotes="263"/>
-        <result value="Not Recommended" numvotes="39"/>
+        <result value="Best" numvotes="200"/>
+        <result value="Recommended" numvotes="265"/>
+        <result value="Not Recommended" numvotes="40"/>
       </results>
       <results numplayers="6+">
         <result value="Best" numvotes="15"/>
         <result value="Recommended" numvotes="63"/>
-        <result value="Not Recommended" numvotes="156"/>
+        <result value="Not Recommended" numvotes="158"/>
       </results>
     </poll>
     <playingtime value="180"/>
     <minage value="10"/>
-    <poll name="suggested_playerage" title="User Suggested Player Age" totalvotes="163">
+    <poll name="suggested_playerage" title="User Suggested Player Age" totalvotes="164">
       <results>
         <result value="2" numvotes="0"/>
         <result value="3" numvotes="0"/>
@@ -64,18 +64,18 @@
         <result value="8" numvotes="1"/>
         <result value="10" numvotes="6"/>
         <result value="12" numvotes="47"/>
-        <result value="14" numvotes="66"/>
+        <result value="14" numvotes="67"/>
         <result value="16" numvotes="34"/>
         <result value="18" numvotes="6"/>
         <result value="21 and up" numvotes="2"/>
       </results>
     </poll>
-    <poll name="language_dependence" title="Language Dependence" totalvotes="210">
+    <poll name="language_dependence" title="Language Dependence" totalvotes="212">
       <results>
         <result level="1" value="No necessary in-game text" numvotes="0"/>
         <result level="2" value="Some necessary text - easily memorized or small crib sheet" numvotes="3"/>
         <result level="3" value="Moderate in-game text - needs crib sheet or paste ups" numvotes="26"/>
-        <result level="4" value="Extensive use of text - massive conversion needed to be playable" numvotes="159"/>
+        <result level="4" value="Extensive use of text - massive conversion needed to be playable" numvotes="161"/>
         <result level="5" value="Unplayable in another language" numvotes="22"/>
       </results>
     </poll>
@@ -111,5 +111,25 @@
     <link type="boardgamepublisher" id="12540" value="Game Harbor"/>
     <link type="boardgamepublisher" id="5530" value="Giochi Uniti"/>
     <link type="boardgamepublisher" id="264" value="Heidelberger Spieleverlag"/>
+    <statistics page="1">
+      <ratings>
+        <usersrated value="14394"/>
+        <average value="7.86556"/>
+        <bayesaverage value="7.73836"/>
+        <ranks>
+          <rank type="subtype" id="1" name="boardgame" friendlyname="Board Game Rank" value="22" bayesaverage="7.73836"/>
+          <rank type="family" id="5496" name="thematic" friendlyname="Thematic Rank" value="5" bayesaverage="7.72916"/>
+        </ranks>
+        <stddev value="1.53962"/>
+        <median value="0"/>
+        <owned value="14858"/>
+        <trading value="280"/>
+        <wanting value="545"/>
+        <wishing value="2895"/>
+        <numcomments value="3630"/>
+        <numweights value="1408"/>
+        <averageweight value="3.1392"/>
+      </ratings>
+    </statistics>
   </item>
 </items>

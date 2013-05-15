@@ -4,7 +4,8 @@
 (defn thing-xml [id]
   (:body (http/get "http://www.boardgamegeek.com/xmlapi2/thing"
            {:query-params
-            {:id id}})))
+            {:id id
+             :stats 1}})))
 
 (defn collection-xml [username]
   (:body (http/get "http://www.boardgamegeek.com/xmlapi2/collection"

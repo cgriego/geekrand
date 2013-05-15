@@ -30,10 +30,11 @@
                 [:br]
                 (if-not (= 0 (:playing-time game))
                   (list
-                    (:playing-time game) " Minute" (if-not (= 1 (:playing-time game)) "s")
-                    [:br]))
-                    (if-not (= 0 (:min-age game))
-                  (list (:min-age game) " and Older"))])))))))
+                    (:playing-time game) " Minute" (if-not (= 1 (:playing-time game)) "s") [:br]))
+                (if-not (= 0 (:min-age game))
+                  (list (:min-age game) " and Older" [:br]))
+                (if-not (= "Not Ranked" (:bgg-rank game))
+                  (list (format "%,d" (Integer/parseInt (:bgg-rank game))) " on BGG"))])))))))
 
 (defroutes home-routes
   (GET "/" [username] (home-page username)))
