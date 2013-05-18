@@ -15,8 +15,9 @@
         [:ul
           [:li (link-to "/?username=DGM+Library" "DGM Library")]
           [:li (link-to "/?username=TomVasel" "TomVasel")]
-          [:li (link-to "/?username=cgriego" "cgriego")]])
-      (let [game (random-game username)]
+          [:li (link-to "/?username=cgriego" "cgriego")]
+          [:li (link-to "/?username=Aldie%2C+derk" "Aldie, derk")]])
+      (let [game (random-game (distinct (clojure.string/split username #"\s*,\s*")))]
         (if (nil? game)
           [:p.lead [:strong "You don't have any games!"]]
           (let [game (game-details (:objectid game))]

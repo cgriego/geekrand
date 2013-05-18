@@ -34,11 +34,14 @@
       (* 60 5) ; 5 minutes
       (fn [] (client/collection-xml username)))))
 
-(defn random-games [amount username]
-  (take amount (shuffle (games username))))
+(defn multi-user-games [usernames]
+  (distinct (flatten (map games usernames))))
 
-(defn random-game [username]
-  (let [games (games username)]
+(defn random-games [amount usernames]
+  (take amount (shuffle (multi-user-games usernames))))
+
+(defn random-game [usernames]
+  (let [games (multi-user-games usernames)]
     (if (empty? games)
       nil
       (rand-nth games))))
