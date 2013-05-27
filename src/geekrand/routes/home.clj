@@ -3,6 +3,24 @@
   (:require [geekrand.views.layout :as layout]
             [geekrand.util :as util]))
 
+(defn abs [number]
+  (if (< number 0) (* number -1) number))
+
+(defn ordinal-suffix [rank]
+  (let [abs-rank (abs rank)]
+    (if (contains? (set [11 12 13]) (mod abs-rank 100))
+      "th"
+      (case (mod abs-rank 10)
+        1 "st"
+        2 "nd"
+        3 "rd"
+        "th"))))
+
+(defn game-rank [bgg-rank]
+  (if-not (= "Not Ranked" bgg-rank)
+    (let [bgg-rank-int (Integer/parseInt bgg-rank)]
+      (list (format "%,d" bgg-rank-int) (ordinal-suffix bgg-rank-int) " on BGG"))))
+
 (defn home-page [username]
   (layout/common
     (form-to {:style "margin: 10px 0;"} [:get "/"]
@@ -34,8 +52,7 @@
                     (:playing-time game) " Minute" (if-not (= 1 (:playing-time game)) "s") [:br]))
                 (if-not (= 0 (:min-age game))
                   (list (:min-age game) " and Older" [:br]))
-                (if-not (= "Not Ranked" (:bgg-rank game))
-                  (list (format "%,d" (Integer/parseInt (:bgg-rank game))) " on BGG"))])))))))
+                (game-rank (:bgg-rank game))])))))))
 
 (defroutes home-routes
   (GET "/" [username] (home-page username)))
