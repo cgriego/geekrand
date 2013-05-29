@@ -35,7 +35,7 @@
       (fn [] (client/collection-xml username)))))
 
 (defn multi-user-games [usernames]
-  (distinct (flatten (map games usernames))))
+  (distinct (flatten (pmap games usernames))))
 
 (defn random-games [amount usernames]
   (take amount (shuffle (multi-user-games usernames))))
