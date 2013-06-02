@@ -27,11 +27,28 @@
 (defn xml->games [xml]
   (map xml-zip->Game (zip-xml/xml-> (xml->xml-zip xml) :item)))
 
+; 0 games = 5 minutes
+; 30 games = 5 minutes
+; 31 games = 6 minutes
+; 60 games = 35 minutes
+; 100 games = 1 hour, 15 minutes
+; 500 games = 7 hours, 55 minutes
+; 1,000 games = 16 hours, 15 minutes
+; 1,425 games = 1 day
+; 1,426 games = 1 day
+; 2,000 games = 1 day
+(defn collection-expiration [collection-xml]
+  (let [adjusted-collection-size (- 25 (count (xml->games collection-xml)))]
+    (* 60 (cond
+      (> adjusted-collection-size (* 60 24)) (* 60 24) ; maximum 1 day
+      (< adjusted-collection-size) 5 ; minimum 5 minutes
+      :else adjusted-collection-size))))
+
 (defn games [username]
   (xml->games
     (cache/fetch
       (str "geekrand:collection:" username)
-      (* 60 5) ; 5 minutes
+      collection-expiration
       (fn [] (client/collection-xml username)))))
 
 (defn multi-user-games [usernames]

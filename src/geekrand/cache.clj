@@ -48,6 +48,8 @@
   (let [cache-value (memcache/get key)]
     (if (nil? cache-value)
       (let [value (value-function)]
-        (set key value expiration)
+        (if (ifn? expiration)
+          (set key value (expiration value))
+          (set key value expiration))
         value)
       cache-value)))
