@@ -7,7 +7,7 @@
   (:import [java.io ByteArrayInputStream]))
 
 (defrecord Game [name objectid image thumbnail])
-(defrecord GameDetails [name objectid image thumbnail min-players max-players playing-time min-age bgg-rank])
+(defrecord GameDetails [name objectid image thumbnail min-players max-players playing-time min-age bgg-rank expands])
 
 (defn game-url [{:keys [objectid]}]
   (str "http://boardgamegeek.com/boardgame/" objectid))
@@ -57,11 +57,12 @@
 (defn random-games [amount usernames]
   (take amount (shuffle (multi-user-games usernames))))
 
+(defn random-game-from-games [games]
+  (if (empty? games) nil (rand-nth games)))
+
 (defn random-game [usernames]
   (let [games (multi-user-games usernames)]
-    (if (empty? games)
-      nil
-      (rand-nth games))))
+    (random-game-from-games games)))
 
 (defn xml->game-details [xml]
   (let [item (zip-xml/xml1-> (xml->xml-zip xml) :item)]
@@ -73,7 +74,13 @@
                         :max-players  (Integer/parseInt (zip-xml/xml1-> item :maxplayers     (zip-xml/attr :value)))
                         :playing-time (Integer/parseInt (zip-xml/xml1-> item :playingtime    (zip-xml/attr :value)))
                         :min-age      (Integer/parseInt (zip-xml/xml1-> item :minage         (zip-xml/attr :value)))
-                        :bgg-rank     (zip-xml/xml1-> item :statistics :ratings :ranks :rank (zip-xml/attr :value))})))
+                        :bgg-rank     (zip-xml/xml1-> item :statistics :ratings :ranks :rank (zip-xml/attr :value))
+                        :expands      (map
+                                        (fn [link]
+                                          (map->Game {
+                                            :objectid (zip-xml/xml1-> link (zip-xml/attr :id))
+                                            :name     (zip-xml/xml1-> link (zip-xml/attr :value))}))
+                                        (zip-xml/xml-> item :link (zip-xml/attr= :type "boardgameexpansion") (zip-xml/attr= :inbound "true")))})))
 
 (defn game-details [objectid]
   (xml->game-details (client/thing-xml objectid)))

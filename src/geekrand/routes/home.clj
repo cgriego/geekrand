@@ -19,7 +19,20 @@
 (defn game-rank [bgg-rank]
   (if-not (= "Not Ranked" bgg-rank)
     (let [bgg-rank-int (Integer/parseInt bgg-rank)]
-      (list (format "%,d" bgg-rank-int) (ordinal-suffix bgg-rank-int) " on BGG"))))
+      (list (format "%,d" bgg-rank-int) (ordinal-suffix bgg-rank-int) " on BGG" [:br]))))
+
+(defn game-expands [expands combined-collections]
+  (let [collected-ids (map :objectid combined-collections)
+        expands-in-collections (filter (fn [expanded-game] (some (fn [id] (= (:objectid expanded-game) id)) collected-ids)) expands)]
+    (if-not (empty? expands-in-collections)
+      (list
+        "Expands: "
+        (interpose
+          ", "
+          (map
+            (fn [game]
+              (link-to (game-url game) (:name game)))
+            expands-in-collections))))))
 
 (defn home-page [username]
   (layout/common
@@ -35,7 +48,11 @@
           [:li (link-to "/?username=TomVasel" "TomVasel")]
           [:li (link-to "/?username=cgriego" "cgriego")]
           [:li (link-to "/?username=Aldie%2C+derk" "Aldie, derk")]])
-      (let [game (random-game (distinct (clojure.string/split username #"\s*,\s*")))]
+      (let [
+        usernames (distinct (clojure.string/split username #"\s*,\s*"))
+        combined-collections (multi-user-games usernames)
+        game (random-game-from-games combined-collections)
+       ]
         (if (nil? game)
           [:p.lead [:strong "You don't have any games!"]]
           (let [game (game-details (:objectid game))]
@@ -52,7 +69,8 @@
                     (:playing-time game) " Minute" (if-not (= 1 (:playing-time game)) "s") [:br]))
                 (if-not (= 0 (:min-age game))
                   (list (:min-age game) " and Older" [:br]))
-                (game-rank (:bgg-rank game))])))))))
+                (game-rank (:bgg-rank game))
+                (game-expands (:expands game) combined-collections)])))))))
 
 (defroutes home-routes
   (GET "/" [username] (home-page username)))
