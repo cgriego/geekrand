@@ -57,7 +57,7 @@
           [:p.lead [:strong "You don't have any games!"]]
           (let [game (game-details (:objectid game))]
             (list
-              (link-to (game-url game) [:h1 (:name game)] [:p (image (:thumbnail game) "")])
+              (link-to (game-url game) [:h2 (:name game)] [:p (image (:thumbnail game) "")])
               [:p
                 (if (= (:min-players game) (:max-players game))
                   (if-not (= 0 (:min-players game))
