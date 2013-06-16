@@ -19,7 +19,9 @@
   (map->Game { :objectid  (zip-xml/xml1-> item (zip-xml/attr :objectid))
                :name      (zip-xml/xml1-> item :name      zip-xml/text)
                :image     (zip-xml/xml1-> item :image     zip-xml/text)
-               :thumbnail (zip-xml/xml1-> item :thumbnail zip-xml/text)}))
+               :thumbnail (or
+                            (zip-xml/xml1-> item :version :item :thumbnail zip-xml/text)
+                            (zip-xml/xml1-> item :thumbnail zip-xml/text))}))
 
 (defn xml->xml-zip [xml]
   (-> xml string->stream xml/parse zip/xml-zip))

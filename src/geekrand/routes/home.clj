@@ -51,13 +51,13 @@
       (let [
         usernames (distinct (clojure.string/split username #"\s*,\s*"))
         combined-collections (multi-user-games usernames)
-        game (random-game-from-games combined-collections)
+        collected-game (random-game-from-games combined-collections)
        ]
-        (if (nil? game)
+        (if (nil? collected-game)
           [:p.lead [:strong "You don't have any games!"]]
-          (let [game (game-details (:objectid game))]
+          (let [game (game-details (:objectid collected-game))]
             (list
-              (link-to (game-url game) [:h2 (:name game)] [:p (image (:thumbnail game) "")])
+              (link-to (game-url game) [:h2 (:name game)] [:p (image (:thumbnail collected-game) "")])
               [:p
                 (if (= (:min-players game) (:max-players game))
                   (if-not (= 0 (:min-players game))
