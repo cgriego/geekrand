@@ -52,25 +52,26 @@
         usernames (distinct (clojure.string/split username #"\s*,\s*"))
         combined-collections (multi-user-games usernames)
         collected-game (random-game-from-games combined-collections)
+        ;collected-game (first (filter #(= (:objectid %) "6411") combined-collections))
        ]
         (if (nil? collected-game)
           [:p.lead [:strong "You don't have any games!"]]
-          (let [game (game-details (:objectid collected-game))]
+          (let [game-details (get-game-details (:objectid collected-game))]
             (list
-              (link-to (game-url game) [:h2 (:name game)] [:p (image (:thumbnail collected-game) "")])
+              (link-to (game-url collected-game) [:h2 (:name collected-game)] [:p (image (:thumbnail collected-game) "")])
               [:p
-                (if (= (:min-players game) (:max-players game))
-                  (if-not (= 0 (:min-players game))
-                    (list (:min-players game) " Players"))
-                  (list (:min-players game) "-" (:max-players game) " Players"))
+                (if (= (:min-players game-details) (:max-players game-details))
+                  (if-not (= 0 (:min-players game-details))
+                    (list (:min-players game-details) " Players"))
+                  (list (:min-players game-details) "-" (:max-players game-details) " Players"))
                 [:br]
-                (if-not (= 0 (:playing-time game))
+                (if-not (= 0 (:playing-time game-details))
                   (list
-                    (:playing-time game) " Minute" (if-not (= 1 (:playing-time game)) "s") [:br]))
-                (if-not (= 0 (:min-age game))
-                  (list (:min-age game) " and Older" [:br]))
-                (game-rank (:bgg-rank game))
-                (game-expands (:expands game) combined-collections)])))))))
+                    (:playing-time game-details) " Minute" (if-not (= 1 (:playing-time game-details)) "s") [:br]))
+                (if-not (= 0 (:min-age game-details))
+                  (list (:min-age game-details) " and Older" [:br]))
+                (game-rank (:bgg-rank game-details))
+                (game-expands (:expands game-details) combined-collections)])))))))
 
 (defroutes home-routes
   (GET "/" [username] (home-page username)))

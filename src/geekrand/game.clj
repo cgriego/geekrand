@@ -82,5 +82,5 @@
                                             :name     (zip-xml/xml1-> link (zip-xml/attr :value))}))
                                         (zip-xml/xml-> item :link (zip-xml/attr= :type "boardgameexpansion") (zip-xml/attr= :inbound "true")))})))
 
-(defn game-details [objectid]
+(defn get-game-details [objectid]
   (xml->game-details (client/thing-xml objectid)))
