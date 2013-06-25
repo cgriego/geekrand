@@ -23,16 +23,15 @@
 
 (defn game-expands [expands combined-collections]
   (let [collected-ids (map :objectid combined-collections)
-        expands-in-collections (filter (fn [expanded-game] (some (fn [id] (= (:objectid expanded-game) id)) collected-ids)) expands)]
+        expands-in-collections (filter (fn [expanded-game] (some (fn [id] (= (:objectid expanded-game) id)) collected-ids)) expands)
+        linked-expansions (map (fn [game] (link-to (game-url game) (:name game))) expands-in-collections)]
     (if-not (empty? expands-in-collections)
       (list
-        "Expands: "
-        (interpose
-          ", "
-          (map
-            (fn [game]
-              (link-to (game-url game) (:name game)))
-            expands-in-collections))))))
+        "Expands "
+        (case (count linked-expansions)
+          1 linked-expansions
+          2 (interpose " and " linked-expansions)
+          (concat (interpose ", " (butlast linked-expansions)) [", and " (last linked-expansions)]))))))
 
 (defn home-page [username]
   (layout/common
@@ -55,7 +54,7 @@
         usernames (distinct (clojure.string/split username #"\s*,\s*"))
         combined-collections (multi-user-games usernames)
         collected-game (random-game-from-games combined-collections)
-        ;collected-game (first (filter #(= (:objectid %) "6411") combined-collections))
+        ;collected-game (first (filter #(= (:objectid %) "66121") combined-collections))
        ]
         (if (nil? collected-game)
           [:p.lead [:strong "You don't have any games!"]]
