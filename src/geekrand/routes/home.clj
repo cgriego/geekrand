@@ -10,7 +10,7 @@
   (let [abs-rank (abs rank)]
     (if (contains? (set [11 12 13]) (mod abs-rank 100))
       "th"
-      (case (mod abs-rank 10)
+      (case (int (mod abs-rank 10))
         1 "st"
         2 "nd"
         3 "rd"
