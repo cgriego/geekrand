@@ -12,8 +12,8 @@
 (defn game-url [{:keys [objectid]}]
   (str "http://boardgamegeek.com/boardgame/" objectid))
 
-(defn string->stream [string]
-  (java.io.ByteArrayInputStream. (.getBytes ^String string "UTF-8")))
+(defn string->stream [^String string]
+  (java.io.ByteArrayInputStream. (.getBytes string "UTF-8")))
 
 (defn xml-zip->Game [item]
   (map->Game { :objectid  (zip-xml/xml1-> item (zip-xml/attr :objectid))
