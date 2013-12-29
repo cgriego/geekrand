@@ -44,15 +44,15 @@
       (< adjusted-collection-size) 5 ; minimum 5 minutes
       :else adjusted-collection-size))))
 
-(defn games [username]
+(defn games [username include-expansions]
   (xml->games
     (cache/fetch
-      (str "geekrand:collection:" username)
+      (str "geekrand:collection:" username ":" include-expansions)
       collection-expiration
-      (fn [] (client/collection-xml username)))))
+      (fn [] (client/collection-xml username include-expansions)))))
 
-(defn multi-user-games [usernames]
-  (distinct (flatten (pmap games usernames))))
+(defn multi-user-games [usernames include-expansions]
+  (distinct (flatten (pmap #(games % include-expansions) usernames))))
 
 (defn random-games [amount usernames]
   (take amount (shuffle (multi-user-games usernames))))

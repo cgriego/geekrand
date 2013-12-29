@@ -33,12 +33,15 @@
           2 (interpose " and " linked-expansions)
           (concat (interpose ", " (butlast linked-expansions)) [", and " (last linked-expansions)]))))))
 
-(defn home-page [username]
+(defn home-page [username include-expansions]
   (layout/common
     (form-to {:style "margin: 10px 0;"} [:get "/"]
       [:div.input-append
         (text-field {:placeholder "BGG Usernames"} "username" username)
-        [:button.btn {:type "submit"} "Randomize"]])
+        [:button.btn {:type "submit"} "Randomize"]]
+      [:label.checkbox
+        (check-box "expansions" include-expansions)
+        "Include Expansions"])
     (if (empty? username)
       (list
         [:p "GeekRand pick a random board game from a BoardGameGeek user's collection."]
@@ -53,7 +56,7 @@
           [:li (link-to "/?username=cgriego" "Chris Griego, creator of GeekRand")]])
       (let [
         usernames (distinct (clojure.string/split username #"\s*,\s*"))
-        combined-collections (multi-user-games usernames)
+        combined-collections (multi-user-games usernames include-expansions)
         collected-game (random-game-from-games combined-collections)
         ;collected-game (first (filter #(= (:objectid %) "66121") combined-collections))
        ]
@@ -77,4 +80,4 @@
                 (game-expands (:expands game-details) combined-collections)])))))))
 
 (defroutes home-routes
-  (GET "/" [username] (home-page username)))
+  (GET "/" [username expansions] (home-page username (boolean expansions))))
