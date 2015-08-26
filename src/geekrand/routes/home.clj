@@ -50,7 +50,7 @@
         [:ul
           [:li (link-to "/?username=TomVasel" "Tom Vasel, host of The Dice Tower")]
           [:li (link-to "/?username=richardolen2" "Rich Sommer, actor on Mad Men")]
-          [:li (link-to "/?username=Aldie%2C+derk" "Scott Alden & Derk Solko, owners of BoardGameGeek")]
+          [:li (link-to "/?username=Aldie%2C+derk" "Scott Alden & Derk Solko, founders of BoardGameGeek")]
           [:li (link-to "/?username=Geekdo" "BoardGameGeek.CON Library")]
           [:li (link-to "/?username=DGM+Library" "Dallas Games Marathon Library")]
           [:li (link-to "/?username=cgriego" "Chris Griego, creator of GeekRand")]])
